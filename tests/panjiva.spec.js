@@ -1,6 +1,36 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
 
+/**
+ * TASK: Optimise the scrape and make sure that it's compatible with the three pages 
+ * by creating a reusable function
+ * 
+ * STEP 1: 
+ * Dynamically navigate between the pages.
+ * This will look something like this: `https://panjiva.com/shipment_search/company?m=${targetPage}&permanent_id=${consigneeId}&type=all_profile`
+ * where targertPage = merged_shipper, merged_consignee, shipments
+ * Handle the no-results found better by returning and empty message and preventing rest of function from running with return;
+ * 
+ * STEP 2:
+ * Ensure the correct table row count selector is chosen.
+ * const shippersCount = await page
+			.locator(".aggr-stat-container.TARGET-SELECTOR .notranslate.t2tt")
+			.getAttribute("title");
+		console.log(`CONSIGNEE COUNT: ${shippersCount}`);
+ * This will either be .consignees, .shipments or .shippers
+ * 
+ * STEP 3:
+ * Update the console.log calls to be representative of the page that's being scraped 
+ * 
+ * STEP 4:
+ * Remove the max retries part of the getContentWithRetries() function and rename it to be more appropriate 
+ * Ensure the pageTitles array pushes objects that have the appropriate keys for the page being scraped 
+ * 
+ * STEP 5:
+ * Ensure the content is printed to the console using the example.json file as reference
+
+ */
+
 test("Scrape Page", async ({ page }) => {
 	let titles = [];
 	let pageCount = 0;
@@ -11,6 +41,7 @@ test("Scrape Page", async ({ page }) => {
 	let maxPages = 1;
 
 	// Navigate to target page (if not already there)
+	// **<STEP 1>**
 	if (
 		page.url() !==
 		`https://panjiva.com/shipment_search/company?m=merged_consignee&permanent_id=${consigneeId}&type=all_profile`
@@ -25,13 +56,16 @@ test("Scrape Page", async ({ page }) => {
 
 		console.log("Navigated to Shippers Page");
 	}
+	// **</ STEP 1>**
 
+	// **<STEP 1>**
 	// Check to see if page is empty
 	const noResultsFound = await page.locator(".no-results h3").count();
 
 	if (noResultsFound) {
 		console.log("NO RESULTS FOUND");
 		runSuccess = "No Results Found";
+		// **</ STEP 1>**
 	} else {
 		// wait for table to load
 		await page.waitForSelector("#export_records_results", {
@@ -39,10 +73,14 @@ test("Scrape Page", async ({ page }) => {
 		});
 		console.log("Table has appeared on page");
 
+		// **<STEP 2>**
 		const shippersCount = await page
 			.locator(".aggr-stat-container.consignees .notranslate.t2tt")
 			.getAttribute("title");
-		console.log(`CONSIGNEE COUNT: ${shippersCount}`);
+		/* **<STEP 3>** */ console.log(
+			`CONSIGNEE COUNT: ${shippersCount}`
+		); /* **</STEP 3>** */
+		// **</STEP 2>**
 
 		// Convert to number and remove comma
 		shippersCountNumber = parseInt(shippersCount.replace(",", ""));
@@ -86,7 +124,8 @@ test("Scrape Page", async ({ page }) => {
 			}
 
 			async function getContentWithRetry(page, maxRetries = 3) {
-				for (let i = 0; i < maxRetries; i++) {
+				/* **<STEP 4>** */ for (let i = 0; i < maxRetries; i++) {
+					/* **<STEP 4>** */
 					const rows = await page
 						.locator("#results_set_wrapper tbody tr")
 						.all();
@@ -99,19 +138,23 @@ test("Scrape Page", async ({ page }) => {
 								const shipperGlobalHq = await cells[1].textContent();
 								const shipperLocalHq = await cells[2].textContent();
 								const shipperUltimateParent = await cells[3].textContent();
+								/* **<STEP 4>** */
 								pageTitles.push({
 									shipper: shipper.trim(),
 									shipperGlobalHq: shipperGlobalHq.trim(),
 									shipperLocalHq: shipperLocalHq.trim(),
 									shipperUltimateParent: shipperUltimateParent.trim(),
 								});
+								/* **</STEP 4>** */
 							}
 						}
 						return pageTitles;
-					}
+					} /* **<STEP 4>** */
 					await page.waitForTimeout(15000); // Wait for 15 seconds before retrying
 				}
-				throw new Error("Failed to load content after multiple retries");
+				throw new Error(
+					"Failed to load content after multiple retries"
+				); /* **<STEP 4>** */
 			}
 
 			while (pageCount < maxPages) {
@@ -158,7 +201,7 @@ test("Scrape Page", async ({ page }) => {
 				runSuccess = "Please Review";
 			}
 		}
-
+		/* **<STEP 5>** */
 		console.log({
 			// url: request.url,
 			titles: titles,
@@ -167,5 +210,6 @@ test("Scrape Page", async ({ page }) => {
 			spreadsheetId: "1Ot8H6G_3RbAg9yrLFFzno1qXr2lS9c6vR_Yo2V4wme0",
 			sheetName: "Sheet1",
 		});
+		/* **<STEP 5>** */
 	}
 });
