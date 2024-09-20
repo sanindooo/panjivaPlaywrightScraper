@@ -1,0 +1,185 @@
+{
+  "cookies": [
+    {
+      "name": "__cf_bm",
+      "value": "jXm550c1q1ccBqpiXJ7TStwWNRQmC.u5GeTHJaWFMcI-1726822366-1.0.1.1-vfvzzTqru7CJ_90MR9Vj2yfB7A3HfFleMbgE_JseNZ5QmznL8klVv5gSoLj8ADMLq9FkNSVCOoCKBbdxtV88.Q",
+      "domain": ".fonts.net",
+      "path": "/",
+      "expires": 1726824166.758534,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.14598744.1726822367",
+      "domain": ".panjiva.com",
+      "path": "/",
+      "expires": 1761382369.106412,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "test_cookie",
+      "value": "CheckForPermission",
+      "domain": ".doubleclick.net",
+      "path": "/",
+      "expires": 1726823267.295769,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_panjiva_sid",
+      "value": "9674394b22723a9f897cd97d7e7987f7",
+      "domain": ".panjiva.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "should_have_login",
+      "value": "true",
+      "domain": "panjiva.com",
+      "path": "/",
+      "expires": 1758358369,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "OptanonConsent",
+      "value": "isGpcEnabled=0&datestamp=Fri+Sep+20+2024+09%3A52%3A49+GMT%2B0100+(British+Summer+Time)&version=202306.1.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=204a9d8b-85ca-400c-8935-291d355064e4&interactionCount=1&landingPath=NotLandingPage&groups=C0003%3A0%2CC0004%3A0%2CC0002%3A0%2CC0001%3A1&AwaitingReconsent=false",
+      "domain": ".panjiva.com",
+      "path": "/",
+      "expires": 1742374369,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "liveagent_oref",
+      "value": "https://panjiva.com/account/login",
+      "domain": "panjiva.com",
+      "path": "/",
+      "expires": 1758358369,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_77WKMXWM0R",
+      "value": "GS1.1.1726822367.1.1.1726822370.57.0.0",
+      "domain": ".panjiva.com",
+      "path": "/",
+      "expires": 1761382370.252308,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "liveagent_sid",
+      "value": "06aae232-7c10-4051-9549-753a6ee493ae",
+      "domain": "panjiva.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "liveagent_vc",
+      "value": "2",
+      "domain": "panjiva.com",
+      "path": "/",
+      "expires": 1758358370,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "liveagent_ptid",
+      "value": "06aae232-7c10-4051-9549-753a6ee493ae",
+      "domain": "panjiva.com",
+      "path": "/",
+      "expires": 1758358370,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://panjiva.com",
+      "localStorage": [
+        {
+          "name": "liveAgentSid",
+          "value": "06aae232-7c10-4051-9549-753a6ee493ae"
+        },
+        {
+          "name": "_pendo_meta.1bc3b062-eb2f-40eb-6f99-8ff361c9cc5b",
+          "value": "{\"ttl\":1735462369840,\"value\":189784272}"
+        },
+        {
+          "name": "__headerUserInternalDataset__data",
+          "value": "{\"datums\":[],\"trie\":{\"ids\":[],\"children\":{}}}"
+        },
+        {
+          "name": "_pendo_guides_blocked.1bc3b062-eb2f-40eb-6f99-8ff361c9cc5b",
+          "value": "{\"ttl\":1726836770051,\"value\":\"0\"}"
+        },
+        {
+          "name": "liveAgentPage_0",
+          "value": "https://panjiva.com/dashboard/108593"
+        },
+        {
+          "name": "liveAgentStart",
+          "value": "1726822370800"
+        },
+        {
+          "name": "liveAgentPc",
+          "value": "1"
+        },
+        {
+          "name": "__headerUserInternalDataset__protocol",
+          "value": "\"https:\""
+        },
+        {
+          "name": "__headerUserInternalDataset__thumbprint__ttl__",
+          "value": "1726822669200"
+        },
+        {
+          "name": "liveAgentPageTime_0",
+          "value": "1726822370800"
+        },
+        {
+          "name": "_pendo___sg__.1bc3b062-eb2f-40eb-6f99-8ff361c9cc5b",
+          "value": "{\"ttl\":1735462369841,\"value\":\"{\\\"visitormetadata\\\":{\\\"agent__role\\\":\\\"user\\\"}}\"}"
+        },
+        {
+          "name": "_pendo_accountId.1bc3b062-eb2f-40eb-6f99-8ff361c9cc5b",
+          "value": "{\"ttl\":1735462369838,\"value\":\"64422\"}"
+        },
+        {
+          "name": "__headerUserInternalDataset__data__ttl__",
+          "value": "1726822669200"
+        },
+        {
+          "name": "__headerUserInternalDataset__protocol__ttl__",
+          "value": "1726822669200"
+        },
+        {
+          "name": "__headerUserInternalDataset__thumbprint",
+          "value": "\"0.9.3\""
+        },
+        {
+          "name": "_pendo_visitorId.1bc3b062-eb2f-40eb-6f99-8ff361c9cc5b",
+          "value": "{\"ttl\":1735462369838,\"value\":\"650368\"}"
+        }
+      ]
+    }
+  ]
+}
