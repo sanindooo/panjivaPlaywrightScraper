@@ -153,6 +153,10 @@ test("Scrape Page", async ({ page }) => {
 
 				console.log("results length: ", results.length);
 
+				// We need to see if the shippersCount === results.lenght because
+				// results.length is the length of the scraped table rows. This is a
+				// good indicator of success since they should always be the same
+
 				return shippersCountNumber;
 			}
 		} catch (error) {
@@ -225,7 +229,7 @@ test("Scrape Page", async ({ page }) => {
 					const cell2 = await cells[1].textContent();
 					const cell3 = await cells[2].textContent();
 					const cell4 = await cells[3].textContent();
-					const cell5 = await cells[3].textContent();
+					const cell5 = await cells[4].textContent();
 					if (pageType === "merged_shipper") {
 						pageTitles.push({
 							shipper: cell1.trim(),
