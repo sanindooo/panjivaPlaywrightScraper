@@ -270,7 +270,7 @@ test("Scrape Page", async ({ page }) => {
 
 			const shippersCountNumber = await processDataFromPage(page, pageType);
 
-			console.log(`Shippers count for ${pageType}: ${shippersCountNumber}`);
+			console.log(`Table row count for ${pageType}: ${shippersCountNumber}`);
 
 			// 2. RETURN statement to check if arrays are equal to the number title (shippersCountNumber)
 
@@ -291,5 +291,6 @@ test("Scrape Page", async ({ page }) => {
 		consigneeId: consigneeId,
 		spreadsheetId: "1Ot8H6G_3RbAg9yrLFFzno1qXr2lS9c6vR_Yo2V4wme0",
 		sheetName: "Sheet1",
+		rowNumber: 2,
 	});
 });
