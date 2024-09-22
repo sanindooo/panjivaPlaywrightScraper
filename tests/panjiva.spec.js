@@ -229,7 +229,6 @@ test("Scrape Page", async ({ page }) => {
 					const cell2 = await cells[1].textContent();
 					const cell3 = await cells[2].textContent();
 					const cell4 = await cells[3].textContent();
-					const cell5 = await cells[4].textContent();
 					if (pageType === "merged_shipper") {
 						pageTitles.push({
 							shipper: cell1.trim(),
@@ -246,10 +245,10 @@ test("Scrape Page", async ({ page }) => {
 						});
 					} else if (pageType === "shipments") {
 						pageTitles.push({
-							shipmentId: cell2.trim(),
-							shipmentGlobalHq: cell3.trim(),
-							shipmentLocalHq: cell4.trim(),
-							shipmentUltimateParent: cell5.trim(),
+							shipmentId: cell1.trim(),
+							shipmentGlobalHq: cell2.trim(),
+							shipmentLocalHq: cell3.trim(),
+							shipmentUltimateParent: cell4.trim(),
 						});
 					}
 				} else {
