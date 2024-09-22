@@ -147,13 +147,11 @@ test("Scrape Page", async ({ page }) => {
 					console.log(`MAX PAGES: ${maxPages}`);
 				}
 
-				const results = await isPageProcessed(page, maxPages, pageType);
+				const results = await handlePageination(page, maxPages, pageType);
 
 				console.log(`${pageType.toUpperCase()} COUNT: ${shippersCount}`);
 
-				// resultsArray[pageType].push(results);
-
-				// console.log("results: ", results);
+				console.log("results length: ", results.length);
 
 				return shippersCountNumber;
 			}
@@ -164,7 +162,7 @@ test("Scrape Page", async ({ page }) => {
 	}
 
 	// Check if page has been processed
-	async function isPageProcessed(page, maxPages, pageType) {
+	async function handlePageination(page, maxPages, pageType) {
 		let pageCount = 0;
 		const titles = [];
 
@@ -189,7 +187,7 @@ test("Scrape Page", async ({ page }) => {
 					break;
 				}
 
-				console.log(`SHIPPERS LENGTH: ${titles.length}`);
+				console.log(`${pageType.toUpperCase()} LENGTH: ${titles.length}`);
 
 				await nextButton.click({ timeout: 15000 });
 				console.log("Next button clicked");
@@ -209,8 +207,6 @@ test("Scrape Page", async ({ page }) => {
 			}
 		}
 
-		// console.log("titles: ", titles);
-
 		return titles;
 	}
 
@@ -221,13 +217,15 @@ test("Scrape Page", async ({ page }) => {
 
 		if (rows.length > 0) {
 			for (const row of rows) {
-				const cells = await row.locator("td").all();
+				// 1. try catch and skip if row doesn't have .wrap class? On shipments page
+				const cells = await row.locator(".wrap").all();
 
 				if (cells.length >= 4) {
 					const cell1 = await cells[0].textContent();
 					const cell2 = await cells[1].textContent();
 					const cell3 = await cells[2].textContent();
 					const cell4 = await cells[3].textContent();
+					const cell5 = await cells[3].textContent();
 					if (pageType === "merged_shipper") {
 						pageTitles.push({
 							shipper: cell1.trim(),
@@ -244,10 +242,10 @@ test("Scrape Page", async ({ page }) => {
 						});
 					} else if (pageType === "shipments") {
 						pageTitles.push({
-							shipmentId: cell1.trim(),
-							shipmentGlobalHq: cell2.trim(),
-							shipmentLocalHq: cell3.trim(),
-							shipmentUltimateParent: cell4.trim(),
+							shipmentId: cell2.trim(),
+							shipmentGlobalHq: cell3.trim(),
+							shipmentLocalHq: cell4.trim(),
+							shipmentUltimateParent: cell5.trim(),
 						});
 					}
 				} else {
@@ -270,8 +268,8 @@ test("Scrape Page", async ({ page }) => {
 			const shippersCountNumber = await processDataFromPage(page, pageType);
 
 			console.log(`Shippers count for ${pageType}: ${shippersCountNumber}`);
-			// console.log(`Titles for ${pageType}: ${results}`);
-			// console.log(`Rows for ${pageType}: ${JSON.stringify(resultsArray)}`);
+
+			// 2. RETURN statement to check if arrays are equal to the number title (shippersCountNumber)
 
 			// if (shippersCountNumber === results.length) {
 			// 	runSuccess = "Success";
@@ -283,7 +281,6 @@ test("Scrape Page", async ({ page }) => {
 
 	await processPages(page, consigneeId);
 
-	/* **<STEP 5>** */
 	console.log({
 		// url: request.url,
 		results: resultsArray,
@@ -292,5 +289,4 @@ test("Scrape Page", async ({ page }) => {
 		spreadsheetId: "1Ot8H6G_3RbAg9yrLFFzno1qXr2lS9c6vR_Yo2V4wme0",
 		sheetName: "Sheet1",
 	});
-	/* **<STEP 5>** */
 });
