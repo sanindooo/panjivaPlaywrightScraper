@@ -34,7 +34,7 @@ import { test, expect } from "@playwright/test";
 test("Scrape Page", async ({ page }) => {
 	// let titles = [];
 	// let pageCount = 0;
-	let runSuccess = "Unconfirmed";
+	let runSuccess = "Please Review";
 	let consigneeId = "44402588";
 	// let consigneeId = "96223324";
 	let shippersCountNumber;
@@ -154,10 +154,6 @@ test("Scrape Page", async ({ page }) => {
 
 				console.log("results length: ", results.length);
 
-				// We need to see if the shippersCount === results.lenght because
-				// results.length is the length of the scraped table rows. This is a
-				// good indicator of success since they should always be the same
-
 				return shippersCountNumber;
 			}
 		} catch (error) {
@@ -217,7 +213,9 @@ test("Scrape Page", async ({ page }) => {
 
 	// Scrapes table rows and extracts shipper details (name, global HQ, local HQ, ultimate parent)
 	async function extractPageTitles(page, pageType) {
-		const rows = await page.locator("#results_set_wrapper tbody tr").all();
+		const rows = await page
+			.locator("#results_set_wrapper tbody tr:not(#missing-row)")
+			.all();
 		const pageTitles = [];
 
 		if (rows.length > 0) {
@@ -280,8 +278,6 @@ test("Scrape Page", async ({ page }) => {
 
 	if (shippersCountNumber === resultsArray["shipments"].length) {
 		runSuccess = "Success";
-	} else {
-		runSuccess = "Please Review";
 	}
 
 	console.log({
