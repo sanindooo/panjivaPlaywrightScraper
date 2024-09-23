@@ -35,7 +35,8 @@ test("Scrape Page", async ({ page }) => {
 	// let titles = [];
 	// let pageCount = 0;
 	let runSuccess = "Unconfirmed";
-	let consigneeId = "44402588";
+	// let consigneeId = "44402588";
+	let consigneeId = "96223324";
 	let shippersCountNumber;
 	let largePage = false;
 	// let maxPages = 1;
@@ -222,13 +223,14 @@ test("Scrape Page", async ({ page }) => {
 		if (rows.length > 0) {
 			for (const row of rows) {
 				// 1. try catch and skip if row doesn't have .wrap class? On shipments page
-				const cells = await row.locator(".wrap").all();
+				const cells = await row.locator(".wrap:not(.col_view_record)").all();
 
 				if (cells.length >= 4) {
 					const cell1 = await cells[0].textContent();
 					const cell2 = await cells[1].textContent();
 					const cell3 = await cells[2].textContent();
 					const cell4 = await cells[3].textContent();
+
 					if (pageType === "merged_shipper") {
 						pageTitles.push({
 							shipper: cell1.trim(),
@@ -245,10 +247,10 @@ test("Scrape Page", async ({ page }) => {
 						});
 					} else if (pageType === "shipments") {
 						pageTitles.push({
-							shipmentId: cell1.trim(),
-							shipmentGlobalHq: cell2.trim(),
-							shipmentLocalHq: cell3.trim(),
-							shipmentUltimateParent: cell4.trim(),
+							consignee: cell1.trim(),
+							shipper: cell2.trim(),
+							hsCode: cell3.trim(),
+							goodsShipped: cell4.trim(),
 						});
 					}
 				} else {
@@ -286,7 +288,7 @@ test("Scrape Page", async ({ page }) => {
 
 	console.log({
 		// url: request.url,
-		results: resultsArray,
+		results: JSON.stringify(resultsArray),
 		status: runSuccess,
 		consigneeId: consigneeId,
 		spreadsheetId: "1Ot8H6G_3RbAg9yrLFFzno1qXr2lS9c6vR_Yo2V4wme0",
