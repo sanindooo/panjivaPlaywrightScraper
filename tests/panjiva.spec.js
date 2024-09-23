@@ -35,8 +35,8 @@ test("Scrape Page", async ({ page }) => {
 	// let titles = [];
 	// let pageCount = 0;
 	let runSuccess = "Unconfirmed";
-	// let consigneeId = "44402588";
-	let consigneeId = "96223324";
+	let consigneeId = "44402588";
+	// let consigneeId = "96223324";
 	let shippersCountNumber;
 	let largePage = false;
 	// let maxPages = 1;
@@ -273,18 +273,16 @@ test("Scrape Page", async ({ page }) => {
 			const shippersCountNumber = await processDataFromPage(page, pageType);
 
 			console.log(`Table row count for ${pageType}: ${shippersCountNumber}`);
-
-			// 2. RETURN statement to check if arrays are equal to the number title (shippersCountNumber)
-
-			// if (shippersCountNumber === results.length) {
-			// 	runSuccess = "Success";
-			// } else {
-			// 	runSuccess = "Please Review";
-			// }
 		}
 	}
 
 	await processPages(page, consigneeId);
+
+	if (shippersCountNumber === resultsArray["shipments"].length) {
+		runSuccess = "Success";
+	} else {
+		runSuccess = "Please Review";
+	}
 
 	console.log({
 		// url: request.url,
